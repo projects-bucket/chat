@@ -24,13 +24,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-             Padding(
+          Padding(
             padding: EdgeInsets.all(0.0),
             child: IconButton(
               icon: Icon(Icons.qr_code),
               onPressed: () {
                 showQrCodeDialog(context);
-               
               },
             ),
           ),
@@ -48,16 +47,15 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ),
-            IconButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfileScreen(),
-                        ),
-                      ),
-                      icon: SvgPicture.asset('assets/icons/profile.svg'),
-                    ),
-       
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileScreen(),
+              ),
+            ),
+            icon: SvgPicture.asset('assets/icons/profile.svg'),
+          ),
         ],
         title: Text("Welcome Yesh"),
         backgroundColor: Colors.blueAccent,
@@ -73,7 +71,6 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-             
               SizedBox(
                 height: 20,
               ),
@@ -111,7 +108,6 @@ class HomeScreen extends StatelessWidget {
                 height: 25,
               ),
               buildDoctorList(queryData),
-              
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
@@ -127,6 +123,20 @@ class HomeScreen extends StatelessWidget {
                 height: 20,
               ),
               buildCategoryList(),
+              FloatingActionButton(onPressed: () async {
+                dynamic conversationObject = {
+                  'appId':
+                      '2d44183f844fcbe7768e125204e5769a3', // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
+                };
+
+                KommunicateFlutterPlugin.buildConversation(conversationObject)
+                    .then((clientConversationId) {
+                  print("Conversation builder success : " +
+                      clientConversationId.toString());
+                }).catchError((error) {
+                  print("Conversation builder error : " + error.toString());
+                });
+              }),
             ],
           ),
         ),
@@ -187,38 +197,49 @@ class HomeScreen extends StatelessWidget {
 
                 return Consultation.fromJson(data);
               }).toList();
-              return _consultation.length !=0 ? SizedBox(
-                height: _consultation.length * 120,
-                child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: DoctorCard2(
-                          _consultation[index].appointmentName,
-                          _consultation[index].appointmentDate,
-                          _consultation[index].docName,
-                          images[index],
-                          colors[index], () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                DetailScreen1(_consultation[index]),
+              return _consultation.length != 0
+                  ? SizedBox(
+                      height: _consultation.length * 120,
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: DoctorCard2(
+                                _consultation[index].appointmentName,
+                                _consultation[index].appointmentDate,
+                                _consultation[index].docName,
+                                images[index],
+                                colors[index], () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailScreen1(_consultation[index]),
+                                ),
+                              );
+                            }),
+                          );
+                        },
+                        itemCount:
+                            _consultation.length > 3 ? 3 : _consultation.length,
+                      ),
+                    )
+                  : Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(40.0),
+                        child: SizedBox(
+                          child: Text(
+                            "You don't have any consultations yet",
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                        );
-                      }),
+                        ),
+                      ),
                     );
-                  },
-                  itemCount:
-                      _consultation.length > 3 ? 3 : _consultation.length,
-                ),
-              ): Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(40.0),
-                  child: SizedBox(child: Text("You don't have any consultations yet",style: TextStyle(color: Colors.black54,fontSize: 18,),textAlign: TextAlign.center,),),
-                ),
-              );
             } else {
               return CircularProgressIndicator(
                 color: primaryColor,
