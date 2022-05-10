@@ -7,6 +7,7 @@ import 'package:doctor_app/screens/notification.dart';
 import 'package:doctor_app/services/consultations_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 import 'package:url_launcher/link.dart';
 
 import '../constants.dart';
