@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -8,18 +7,19 @@ class ProfilePic extends StatelessWidget {
   const ProfilePic({
     Key? key,
   }) : super(key: key);
-  Widget buildProfile(){
+  Widget buildProfile() {
     User? user = FirebaseAuth.instance.currentUser;
-    if(user!=null && user.photoURL!=null ){
+    if (user != null && user.photoURL != null) {
       return CircleAvatar(
-            backgroundImage: NetworkImage(user.photoURL!),
-          );
-    }else{
+        backgroundImage: NetworkImage(user.photoURL!),
+      );
+    } else {
       return CircleAvatar(
-            backgroundImage: AssetImage("assets/images/Profile Image.png"),
-          );
+        backgroundImage: AssetImage("assets/images/user_pic.png"),
+      );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

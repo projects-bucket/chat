@@ -182,7 +182,7 @@ class PathScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
             child: Text(
-              'Your Mental Path',
+              'Your Dental Path',
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 color: kTitleTextColor,

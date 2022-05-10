@@ -37,19 +37,20 @@ class Treatments extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            treatcard("Meta hysics", "10 AM", "2 doses before food", kBlueColor),
+            treatcard("Ibuprofen", "10 AM", "2 doses before food", kBlueColor),
             SizedBox(
               height: 20,
             ),
-            treatcard("Amorphine", "11 AM", "1 doese after food", kBlueColor),
+            treatcard("Aspirin", "11 AM", "1 doese after food", kBlueColor),
             SizedBox(
               height: 20,
             ),
-            treatcard("Defibrillator", "12 AM", "Run for 45 mins", kBlueColor),
+            treatcard("Rinse and Wash ", "12 AM", "For 10 minutes", kBlueColor),
             SizedBox(
               height: 20,
             ),
-            treatcard("Lean Excersises", "4 PM", "Stretch legs today", kBlueColor),
+            treatcard(
+                "Lean Excersises", "4 PM", "Stretch legs today", kBlueColor),
             SizedBox(
               height: 20,
             ),

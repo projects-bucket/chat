@@ -124,23 +124,26 @@ class HomeScreen extends StatelessWidget {
                 height: 20,
               ),
               buildCategoryList(),
-              FloatingActionButton(onPressed: () async {
-                dynamic conversationObject = {
-                  'appId':
-                      '2d44183f844fcbe7768e125204e5769a3', // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
-                };
-
-                KommunicateFlutterPlugin.buildConversation(conversationObject)
-                    .then((clientConversationId) {
-                  print("Conversation builder success : " +
-                      clientConversationId.toString());
-                }).catchError((error) {
-                  print("Conversation builder error : " + error.toString());
-                });
-              }),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.message),
+        onPressed: () async {
+          dynamic conversationObject = {
+            'appId':
+                '2d44183f844fcbe7768e125204e5769a3', // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from kommunicate dashboard.
+          };
+
+          KommunicateFlutterPlugin.buildConversation(conversationObject)
+              .then((clientConversationId) {
+            print("Conversation builder success : " +
+                clientConversationId.toString());
+          }).catchError((error) {
+            print("Conversation builder error : " + error.toString());
+          });
+        },
       ),
     );
   }
@@ -159,10 +162,10 @@ class HomeScreen extends StatelessWidget {
             kBlueColor,
           ),
           SizedBox(
-            width: 10,
+            height: 10,
           ),
           CategoryCard(
-            'Heart\nSurgery Path',
+            'Heart Surgery ',
             'assets/icons/heart_surgeon.png',
             kYellowColor,
           ),
@@ -170,7 +173,7 @@ class HomeScreen extends StatelessWidget {
             width: 10,
           ),
           CategoryCard(
-            'Eye\nOperation\nPath',
+            'Eye Operation ',
             'assets/icons/eye_specialist.png',
             kOrangeColor,
           ),
